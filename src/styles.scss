@@ -1,0 +1,92 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$food_management-primary: mat.define-palette(mat.$indigo-palette);
+$food_management-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$food_management-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$food_management-theme: mat.define-light-theme((
+  color: (
+    primary: $food_management-primary,
+    accent: $food_management-accent,
+    warn: $food_management-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($food_management-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.card-auth{
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  h2{
+    color: #494949;
+  }
+  p{
+    color:rgba(73, 73, 73, 0.6);
+  }
+  input{
+    background-color: #F7F7F7;
+  }
+  i{
+    color: #8391A1;
+  }
+}
+
+.text-main{
+  color: #4AA35A;
+}
+.bg-main{
+  background-color: #4AA35A !important;
+}
+
+.bg-second{
+  background-color: #3A3A3D !important;
+}
+
+.text-second{
+  color: #3A3A3D;
+}
+
+button{
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  &.primary{
+    background-color: #4AA35A;
+    color: #fff;
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+  &.outline-primary{
+    border: 1px solid #4AA35A;
+    color: #4AA35A;
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+}
