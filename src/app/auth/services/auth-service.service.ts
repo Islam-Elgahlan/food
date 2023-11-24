@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { ILogin } from 'src/app/models/login';
 
@@ -7,8 +8,27 @@ import { ILogin } from 'src/app/models/login';
   providedIn: 'root'
 })
 export class AuthServiceService {
+  role:string|null =''
+  constructor(private _HttpClient:HttpClient ) {
+    if(localStorage.getItem('userToken') !== null){
+      this.getProfile();
+    }
+   }
 
-  constructor(private _HttpClient:HttpClient ) { }
+  getProfile(){
+    let encoded:any = localStorage.getItem('userToken');
+    let decoded:any = jwtDecode(encoded);
+    console.log(decoded.userGroup)
+
+    localStorage.setItem('role' , decoded.userGroup)
+    localStorage.setItem('userName' , decoded.userName)
+    this.getRole()
+  }
+  getRole(){
+    if(localStorage.getItem('userToken') !== null && localStorage.getItem('role')){
+      this.role = localStorage.getItem('role')
+    }
+  }
   login(data:ILogin):Observable<any>{
     return this._HttpClient.post('Users/Login' , data)
   }
@@ -17,5 +37,8 @@ export class AuthServiceService {
   }
   reset(data:any):Observable<any>{
     return this._HttpClient.post('Users/Reset' , data)
+  }
+  changePassword(data:any):Observable<any>{
+    return this._HttpClient.put('Users/ChangePassword' , data)
   }
 }

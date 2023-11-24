@@ -1,0 +1,30 @@
+<section id="sidebar">
+    <div>
+        <div class="text-center mt-3 " (click)=" isOpened=!isOpened">
+            <img src="../../../../assets/images/3.png" alt="" class="w-50">
+        </div>
+        <ng-container  *ngFor=" let item of menue">
+            <a *ngIf="item.isActive" class="d-block text-decoration-none" [routerLink]="item.link" routerLinkActive="bg-active" >
+                <div class="item text-white ">
+                    <span><i class="fa-solid {{item.icon}}"></i></span>
+                    <span class="mx-2">{{item.title}}</span>
+                </div>
+            </a>
+        </ng-container>
+
+        <a (click)="openDialog()" class="d-block text-decoration-none" >
+            <div class="item text-white ">
+                <span><i  class="fa-solid fa-unlock"></i></span>
+                <span class="mx-2">Change Password</span>
+            </div>
+        </a>
+        <a class="d-block text-decoration-none">
+            <div class="item text-white  " (click)="logout()">
+                <span><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="mx-2">Logout</span>
+            </div>
+        </a>
+
+    </div>
+
+</section>

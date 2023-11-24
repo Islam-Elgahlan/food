@@ -35,6 +35,9 @@ export class LoginComponent {
     this._AuthServiceService.login(data.value).subscribe((res) => {
       this._ToastrService.success(data.value.email, 'Welcome');
       console.log(res)
+      localStorage.setItem('userToken',res.token);
+      this._AuthServiceService.getProfile();
+      this._Router.navigate(['/dashboard'])
     },
       error => {
         this._ToastrService.error(error.error.message, 'Error in Login');
@@ -48,7 +51,6 @@ export class LoginComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       console.log(result);
       if(result){
         this.onResetRequest(result)
@@ -64,5 +66,4 @@ export class LoginComponent {
       this._ToastrService.error(error.error.message, 'Error');
     })
   }
-
 }

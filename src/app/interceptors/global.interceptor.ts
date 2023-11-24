@@ -25,6 +25,7 @@ export class GlobalInterceptor implements HttpInterceptor {
     let clonedRequest = request.clone({
       setHeaders: newHeaders , url: baseUrl + request.url
     })
+    // console.log(newHeaders)
     return next.handle(clonedRequest);
   }
 }

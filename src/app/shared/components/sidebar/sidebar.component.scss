@@ -1,0 +1,13 @@
+.item{
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    margin: 1rem 0px;
+    cursor: pointer;
+}
+.bg-active{
+    background-color: rgba(0, 146, 71, 0.1) !important ;
+}
+.sidebar{
+    border-top-right-radius: 58px;
+}

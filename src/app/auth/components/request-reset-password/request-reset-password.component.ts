@@ -11,11 +11,8 @@ resetRequest(arg0: string) {
 throw new Error('Method not implemented.');
 }
   email: string = '';
-  // constructor(
-  //   public _MatDialog : MatDialog){}
   constructor(
     public dialogRef: MatDialogRef<RequestResetPasswordComponent> ) {}
-
     onNoClick(): void {
       this.dialogRef.close();
     }

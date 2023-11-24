@@ -4,13 +4,22 @@ import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule ,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HomeComponent } from './components/home/home.component';
+import { ChangePasswordComponent } from '../auth/components/change-password/change-password.component';
 
 
 
 @NgModule({
   declarations: [
+
+    NavbarComponent,
+    SidebarComponent,
+    HomeComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
@@ -19,15 +28,21 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule
+    ToastrModule,
+    
+
+
   ],
   exports: [
     SharedRoutingModule,
-    MaterialModule, 
-    HttpClientModule, 
+    MaterialModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule
+    ToastrModule,
+    NavbarComponent,
+    SidebarComponent,
+    HomeComponent
   ]
 })
 export class SharedModule { }
