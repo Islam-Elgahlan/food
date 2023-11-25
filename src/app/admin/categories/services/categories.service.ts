@@ -15,4 +15,10 @@ export class CategoriesService {
   addCategory(data:any):Observable<any>{
     return this._HttpClient.post('Category' , {name: data});
   }
+  deleteCategory(id:number):Observable<any>{
+    return this._HttpClient.delete(`Category/${id}`);
+  }
+  updateCategory(data:any , id:number):Observable<any>{
+    return this._HttpClient.put(`Category/${id}` , {name: data});
+  }
 }

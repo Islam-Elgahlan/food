@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ChangePasswordComponent } from '../auth/components/change-password/change-password.component';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 
 
@@ -19,7 +20,8 @@ import { ChangePasswordComponent } from '../auth/components/change-password/chan
     NavbarComponent,
     SidebarComponent,
     HomeComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { ChangePasswordComponent } from '../auth/components/change-password/chan
     ToastrModule,
     NavbarComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    DeleteDialogComponent
   ]
 })
 export class SharedModule { }

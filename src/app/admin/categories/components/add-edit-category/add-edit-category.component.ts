@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component ,Inject} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA,MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-edit-category',
@@ -9,8 +10,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class AddEditCategoryComponent {
   category: string = '';
   constructor(
-    public dialogRef: MatDialogRef<AddEditCategoryComponent> ) {}
+    public dialogRef: MatDialogRef<AddEditCategoryComponent> ,
+     @Inject(MAT_DIALOG_DATA) public data: any,) {}
     onNoClick(): void {
       this.dialogRef.close();
+      // console.log(this.data)
     }
 }
