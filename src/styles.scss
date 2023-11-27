@@ -73,6 +73,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .bgDark{
   background-color: #1F263E !important;
 }
+.text-dark{
+  color:#1F263E ;
+}
 
 button{
   border: none;
@@ -93,12 +96,10 @@ button{
     }
   }
 }
+
 .page-header{
   color: #fff;
   background-image: url('./assets/images/header-bg-svg.svg');
   background-position: center center;
   border-radius: 15px;
-  
- 
-  
 }

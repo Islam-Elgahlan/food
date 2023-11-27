@@ -1,0 +1,62 @@
+<section class="page-header2 my-4">
+    <div class="container">
+        <div class="row d-flex align-items-center py-4">
+            <div class="col-9 ">
+                <h3 class="text-dark">Fill the <span class="text-main">Recipes </span>!</h3>
+                <p class="text-second">you can now fill the meals easily using the table and form , click here and sill
+                    it with the table !</p>
+            </div>
+            <div class="col-3">
+                <div class="text-center ">
+                    <button class="primary"><a routerLink="/dashboard/admin/recipes"
+                            class="text-white text-decoration-none ">All Recipes <i
+                                class="fa-solid fa-arrow-right mx-3"></i></a></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="add-edit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <form [formGroup]="addEditForm">
+                    <div class="input-group mb-3">
+                        <input type="text" formControlName="name" class="form-control" placeholder="Recipe Name">
+                    </div>
+                    <select formControlName="tagId" class="form-select form-select mb-3"
+                        aria-label=".form-select-lg example">
+                        <option selected value="1">Appetizer</option>
+                        <option value="2">Dessert</option>
+                        <option value="3">Snack</option>
+                        <option value="4">Vegetarian</option>
+                    </select>
+                    <div class="input-group mb-3">
+                        <input type="text" formControlName="price" class="form-control" placeholder="Price">
+                        <span class="input-group-text" id="basic-addon2">EGP</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" formControlName="description" placeholder="Description "
+                            rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="buts text-end">
+                <button class="outline-primary px-5 "><a routerLink="/dashboard/admin/recipes"
+                        class=" text-decoration-none text-main ">Cancel </a></button>
+                <button class="primary text-center mx-4 px-4" (click)="onSubmit(addEditForm)">Save</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <div class=" card-auth p-5 ">
+    <h2 class="d-flex align-items-center justify-content-between">
+        <span>Add Recipe</span>
+    </h2>
+        <div class="input-group mb-3 my-4">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-calendar-days"></i></span>
+            <input   type="text"  class="form-control" placeholder="Category name" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        <button  class="primary w-100">Save</button>
+ </div> -->

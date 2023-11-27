@@ -1,50 +1,69 @@
 import { Component } from '@angular/core';
-import { CategoriesService } from '../../services/categories.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { AddEditCategoryComponent } from '../add-edit-category/add-edit-category.component';
+import { RecipesService } from '../../services/recipes.service';
+import { AddEditRecipesComponent } from '../add-edit-recipes/add-edit-recipes.component';
+import { addAriaReferencedId } from '@angular/cdk/a11y';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
 
+interface IRecipe {
+  id: number,
+  name: string,
+  price: number,
+  description: string,
+  imagePath : string,
+  tag:ITag,
+  category:ICategorey[] ,
+  creationDate: string,
+  modificationDate: string,
+
+}
 interface ICategorey {
   id: number,
   name: string,
   creationDate: string,
   modificationDate: string,
-
 }
-interface ICategoreyData {
+interface ITag {
+  id: number,
+  name: string,
+  creationDate: string,
+  modificationDate: string,
+}
+interface IRecipeData {
   pageNumber: number,
   pageSize: number,
-  data: ICategorey[],
+  data: IRecipe[],
   totalNumberOfRecords: number,
   totalNumberOfPages: number
 }
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  selector: 'app-recipes',
+  templateUrl: './recipes.component.html',
+  styleUrls: ['./recipes.component.scss']
 })
-export class CategoriesComponent {
+export class RecipesComponent {
   searchValue: string = '';
+  selectValue : any ;
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
-  tableResponse: ICategoreyData | undefined;
-  tableData: ICategorey[] | undefined = [];
-
-  constructor(private _CategoriesService: CategoriesService,
+  tableResponse: IRecipeData | undefined;
+  tableData: IRecipe[] | undefined = [];
+  
+  constructor(private _RecipesService: RecipesService,
     private _MatDialog: MatDialog) { }
   ngOnInit() {
     this.getTableData()
   }
-
   getTableData() {
     let parms = {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
-      name: this.searchValue
+      name: this.searchValue,
+      tagId:this.selectValue
 
     }
-    this._CategoriesService.getCategories(parms).subscribe((res) => {
+    this._RecipesService.getRecipies(parms).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
       console.log(this.tableResponse?.totalNumberOfRecords)
@@ -63,12 +82,12 @@ export class CategoriesComponent {
   }
   search(term: string) {
     this.searchValue = term
-    // console.log(term)
+    console.log(term)
     this.getTableData()
   }
 
   openDialog(): void {
-    const dialogRef = this._MatDialog.open(AddEditCategoryComponent, {
+    const dialogRef = this._MatDialog.open(AddEditRecipesComponent, {
       data: {},
       width: '40%',
     });
@@ -81,27 +100,18 @@ export class CategoriesComponent {
       }
     });
   }
-
-
   onAddCategory(data: string) {
-    this._CategoriesService.addCategory(data).subscribe((res) => {
+    this._RecipesService.addRecipies(data).subscribe((res) => {
       this.getTableData()
       console.log(res)
     })
   }
-  onDeleteCategory(id: number) {
-    this._CategoriesService.deleteCategory(id).subscribe((res) => {
+  onDeleteRecipe(id: number) {
+    this._RecipesService.deleteRecipe(id).subscribe((res) => {
       this.getTableData()
       console.log(res)
     })
   }
-  onEditCategory(data:any ,id:number) {
-    this._CategoriesService.updateCategory(data , id).subscribe((res) => {
-      this.getTableData()
-      // console.log(res)
-    })
-  }
-
   onDeleteDialog(categoryData: ICategorey): void {
     const dialogRef = this._MatDialog.open(DeleteDialogComponent, {
       data: categoryData,
@@ -111,12 +121,12 @@ export class CategoriesComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result) {
-        this.onDeleteCategory(result.id)
+        this.onDeleteRecipe(result.id)
       }
     });
   }
   onEditDialog(categoryData: ICategorey): void {
-    const dialogRef = this._MatDialog.open(AddEditCategoryComponent, {
+    const dialogRef = this._MatDialog.open(AddEditRecipesComponent, {
       data: categoryData,
       width: '40%',
     
@@ -127,9 +137,15 @@ export class CategoriesComponent {
       if (result) {
         console.log(result);
 
-        this.onEditCategory(result ,categoryData.id)
-        this.getTableData()
+        // this.onEditCategory(result ,categoryData.id)
+        // this.getTableData()
       }
     });
+  }
+  tagChanged(arg :any) {
+    console.log("Tag Changed " + arg.target.value);
+    // console.log(arg);
+    this.selectValue = arg.target.value;
+    this.getTableData()
   }
 }
