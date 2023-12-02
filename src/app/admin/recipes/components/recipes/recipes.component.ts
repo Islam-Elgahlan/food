@@ -5,38 +5,9 @@ import { RecipesService } from '../../services/recipes.service';
 import { AddEditRecipesComponent } from '../add-edit-recipes/add-edit-recipes.component';
 import { addAriaReferencedId } from '@angular/cdk/a11y';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
+import { HelperService } from 'src/app/service/helper.service';
+import { ICategorey, IRecipe, IRecipeData, ITag } from '../../models/recipe';
 
-interface IRecipe {
-  id: number,
-  name: string,
-  price: number,
-  description: string,
-  imagePath : string,
-  tag:ITag,
-  category:ICategorey[] ,
-  creationDate: string,
-  modificationDate: string,
-
-}
-interface ICategorey {
-  id: number,
-  name: string,
-  creationDate: string,
-  modificationDate: string,
-}
-interface ITag {
-  id: number,
-  name: string,
-  creationDate: string,
-  modificationDate: string,
-}
-interface IRecipeData {
-  pageNumber: number,
-  pageSize: number,
-  data: IRecipe[],
-  totalNumberOfRecords: number,
-  totalNumberOfPages: number
-}
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
@@ -44,15 +15,18 @@ interface IRecipeData {
 })
 export class RecipesComponent {
   searchValue: string = '';
-  selectValue : any ;
+  tagId:any;
+  // selectValue : any ;
   pageSize: number = 5;
   pageNumber: number | undefined = 1;
   tableResponse: IRecipeData | undefined;
   tableData: IRecipe[] | undefined = [];
+  tags:ITag[] = [];
   
-  constructor(private _RecipesService: RecipesService,
+  constructor(private _RecipesService: RecipesService, private _HelperService:HelperService ,
     private _MatDialog: MatDialog) { }
   ngOnInit() {
+    this.getTags()
     this.getTableData()
   }
   getTableData() {
@@ -60,13 +34,20 @@ export class RecipesComponent {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
       name: this.searchValue,
-      tagId:this.selectValue
+      tagId:this.tagId
 
     }
     this._RecipesService.getRecipies(parms).subscribe((res) => {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
       console.log(this.tableResponse?.totalNumberOfRecords)
+    })
+  }
+  getTags(){
+    return this._HelperService.getTags().subscribe((res)=>{
+      this.tags = res ;
+      console.log(res)
+      
     })
   }
   handlePageEvent(e: PageEvent) {
@@ -80,11 +61,7 @@ export class RecipesComponent {
     // this.pageSize = e.pageSize;
     // this.pageIndex = e.pageIndex;
   }
-  search(term: string) {
-    this.searchValue = term
-    console.log(term)
-    this.getTableData()
-  }
+
 
   openDialog(): void {
     const dialogRef = this._MatDialog.open(AddEditRecipesComponent, {
@@ -142,10 +119,18 @@ export class RecipesComponent {
       }
     });
   }
-  tagChanged(arg :any) {
-    console.log("Tag Changed " + arg.target.value);
-    // console.log(arg);
-    this.selectValue = arg.target.value;
+  search(term: string) {
+    this.searchValue = term
+    console.log(term)
     this.getTableData()
+  }
+  // tagChanged(arg :any) {
+  //   console.log("Tag Changed " + arg.target.value);
+  //   // console.log(arg);
+  //   this.selectValue = arg.target.value;
+  //   this.getTableData()
+  // }
+  onEditRecipe(RecipeData:any){
+    console.log(RecipeData.id)
   }
 }

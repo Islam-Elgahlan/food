@@ -25,12 +25,14 @@
                     <div class="input-group mb-3">
                         <input type="text" formControlName="name" class="form-control" placeholder="Recipe Name">
                     </div>
-                    <select formControlName="tagId" class="form-select form-select mb-3"
-                        aria-label=".form-select-lg example">
-                        <option selected value="1">Appetizer</option>
-                        <option value="2">Dessert</option>
-                        <option value="3">Snack</option>
-                        <option value="4">Vegetarian</option>
+                    <select [(ngModel)]="tags" formControlName="tagId" class="form-select form-select mb-3">
+                        <option selected>Select</option>
+                        <option *ngFor="let item of tags" [ngValue]="item.id">{{item.name}}</option>
+                    </select>
+                    <select [(ngModel)]="categories" formControlName="categoriesIds"
+                        class="form-select form-select mb-3">
+                        <option selected>Select</option>
+                        <option *ngFor="let item of categories" [ngValue]="item.id">{{item.name}}</option>
                     </select>
                     <div class="input-group mb-3">
                         <input type="text" formControlName="price" class="form-control" placeholder="Price">
@@ -40,23 +42,28 @@
                         <textarea class="form-control" formControlName="description" placeholder="Description "
                             rows="3"></textarea>
                     </div>
+                    <div>
+                        <ngx-dropzone  (change)="onSelect($event)" [multiple]="false">
+                            <ngx-dropzone-label *ngIf="!imgSrc">
+                                <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+                                Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-label *ngIf="imgSrc">
+                             <img [src]="imgSrc" alt="">
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                            [removable]="true"  [file]="f" (removed)="onRemove(f)">
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+                    </div>
+                    <div class="buts text-end">
+                        <button class="outline-primary px-5 "><a routerLink="/dashboard/admin/recipes"
+                                class=" text-decoration-none text-main ">Cancel </a></button>
+                        <button class="primary text-center mx-4 px-4" (click)="onSubmit(addEditForm)">Save</button>
+                    </div>
                 </form>
             </div>
-            <div class="buts text-end">
-                <button class="outline-primary px-5 "><a routerLink="/dashboard/admin/recipes"
-                        class=" text-decoration-none text-main ">Cancel </a></button>
-                <button class="primary text-center mx-4 px-4" (click)="onSubmit(addEditForm)">Save</button>
-            </div>
+
         </div>
     </div>
 </section>
-<!-- <div class=" card-auth p-5 ">
-    <h2 class="d-flex align-items-center justify-content-between">
-        <span>Add Recipe</span>
-    </h2>
-        <div class="input-group mb-3 my-4">
-            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-calendar-days"></i></span>
-            <input   type="text"  class="form-control" placeholder="Category name" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-        <button  class="primary w-100">Save</button>
- </div> -->

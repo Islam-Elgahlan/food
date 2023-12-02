@@ -7,6 +7,7 @@ const routes: Routes = [
   {path:'' , component:RecipesComponent },
   {path:'recipes' , component:RecipesComponent },
   {path:'add-edit-recipe' , component:AddEditRecipesComponent},
+  {path:'edit/:id' , component:AddEditRecipesComponent},
 ];
 
 @NgModule({

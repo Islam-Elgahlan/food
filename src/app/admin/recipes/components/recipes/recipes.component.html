@@ -22,13 +22,14 @@
                     class="form-control rounded">
             </div>
             <div class="col-3">
-                <select class="form-select" (change)="tagChanged($event)" aria-label="Default select example">
-                    <!-- <option selected>Open this select menu</option> -->
-                    <option   *ngFor="let item of tableData" value={{item.tag.id}}>{{item.tag.name}}</option>
+                <select class="form-select" [(ngModel)]="tagId" (change)="getTableData()" aria-label="Default select example">
+                    <option selected>All</option>
+                    <option *ngFor="let item of tags" value={{item.id}}>{{item.name}}</option>
                 </select>
             </div>
             <div class="col-3">
-                <button class="primary" ><a  routerLink="add-edit-recipe" class="text-white text-decoration-none ">Add New Recipe</a></button>
+                <button class="primary"><a routerLink="add-edit-recipe" class="text-white text-decoration-none ">Add New
+                        Recipe</a></button>
             </div>
         </div>
         <table class="table table-striped">
@@ -43,25 +44,37 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
+            
             <tbody>
                 <tr *ngFor=" let item of tableData">
                     <td>{{item.name}}</td>
                     <td>
-                        <img class="table-img" src="http://upskilling-egypt.com:3002/{{item.imagePath}}">
+                        <img class="table-img" src="https://upskilling-egypt.com/{{item.imagePath}}">
 
                     </td>
                     <td>{{item.price}}</td>
                     <td>{{item.description}}</td>
                     <td>{{item.tag.name}}</td>
-                    <ng-container *ngFor="let categoryItems of item.category">
-                        <td *ngIf="categoryItems.name.length>0">{{categoryItems.name}}</td>
-                        <td *ngIf="item.category ===undefined">No category </td>
+
+                    <ng-container *ngIf="item.category ">
+                        <td *ngFor="let categoryItems of item.category">{{categoryItems.name}}</td>
+                    </ng-container> 
+                    <ng-container *ngIf="item.category.length==0 ">
+                        <td >No category</td>
                     </ng-container>
-                    <td>
-                        <a (click)="onDeleteDialog(item)" class="text-danger mx-4"><i
-                                class="fa-solid fa-trash-can"></i></a>
-                        <a (click)="onEditDialog(item)" class="text-main"><i
-                                class="fa-regular fa-pen-to-square"></i></a>
+
+                    <td class="text-center">
+                        <div class="dropdown">
+                            <a class=" dropdown-toggle text-dark"  role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis fa-2x"></i>
+                            </a>
+                          
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <li><a class="dropdown-item cursor-pointer " ><i class="fa-solid fa-eye mx-2 text-main"></i>View</a></li>
+                              <li><a  class="dropdown-item " [routerLink]="['/dashboard/admin/recipes/edit' ,item.id]" ><i class="fa-regular fa-pen-to-square mx-2 text-main"></i>Edit</a></li>
+                              <li><a (click)="onDeleteDialog(item)" class="dropdown-item " ><i class="fa-solid fa-trash-can mx-2 text-danger"></i>Delete</a></li>
+                            </ul>
+                          </div>
                     </td>
                 </tr>
             </tbody>

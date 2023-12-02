@@ -10,9 +10,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ChangePasswordComponent } from '../auth/components/change-password/change-password.component';
-import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
-
-
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component'
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -31,6 +30,7 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     ReactiveFormsModule,
     FormsModule,
     ToastrModule,
+    NgxDropzoneModule,
     
 
 
@@ -45,7 +45,8 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     NavbarComponent,
     SidebarComponent,
     HomeComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    NgxDropzoneModule
   ]
 })
 export class SharedModule { }
