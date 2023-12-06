@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-
+  imgSrc: any;
   registerForm = new FormGroup({
     userName: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -28,7 +28,12 @@ export class RegisterComponent {
     public _MatDialog: MatDialog,
     ) { }
     onRegister(data: FormGroup) {
-    console.log(data.value)
+      let myData = new FormData()
+      let myMap = new Map(Object.entries(data.value))
+      for (const [key,value] of myMap){
+        myData.append(key , data.value[key])
+      }
+    // console.log(data.value)
     this._AuthServiceService.register(data.value).subscribe((res) => {
       this._ToastrService.success(data.value.email, 'Welcome');
       console.log(res)
@@ -63,5 +68,18 @@ export class RegisterComponent {
     },error =>{
       this._ToastrService.error(error.error.message, 'Error');
     })
+  }
+
+  files: File[] = [];
+
+  onSelect(event: any) {
+    console.log(event.addedFiles[0].name);
+    this.imgSrc = event.addedFiles[0];
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event: any) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
 }
