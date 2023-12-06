@@ -1,0 +1,32 @@
+<section>
+    <div class="container">
+        <div class="text-end py-2">
+            
+            <a (click)="onNoClick()">
+                <i  class="fa-regular fa-circle-xmark text-danger fa-2x "></i>
+            </a>
+        </div>
+        <div class="row py-2">
+            <div class="avatar">
+                <div class="col-10 mx-auto py-2">
+                    <img [src]=" 'https://upskilling-egypt.com/'+ data.imagePath" class="w-100" >
+                </div>
+            </div>
+            <div class="col-6">
+                <h4>{{data.name}}</h4>
+            </div>
+            <div class="col-6">
+                <h4>{{data.price}}</h4>
+            </div>
+            <div class="col-12">
+                <h4>{{data.description}}</h4>
+            </div>
+            <div class="col-12 text-end">
+               <button class="btn btn-outline-danger">
+                <i class="fa-solid fa-heart mx-2 "></i>
+                <span> Favorite</span>
+               </button>
+            </div>
+        </div>
+    </div>
+</section>

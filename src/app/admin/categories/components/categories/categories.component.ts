@@ -117,7 +117,7 @@ export class CategoriesComponent {
   }
   onEditDialog(categoryData: ICategorey): void {
     const dialogRef = this._MatDialog.open(AddEditCategoryComponent, {
-      data: categoryData,
+      data: {categoryData},
       width: '40%',
     
     });

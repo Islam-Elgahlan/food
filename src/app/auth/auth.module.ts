@@ -7,6 +7,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RequestResetPasswordComponent } from './components/request-reset-password/request-reset-password.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -14,7 +15,8 @@ import { RequestResetPasswordComponent } from './components/request-reset-passwo
   declarations: [
     LoginComponent,
     ResetPasswordComponent,
-    RequestResetPasswordComponent
+    RequestResetPasswordComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

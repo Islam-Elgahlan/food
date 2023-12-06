@@ -25,11 +25,11 @@
                     <div class="input-group mb-3">
                         <input type="text" formControlName="name" class="form-control" placeholder="Recipe Name">
                     </div>
-                    <select [(ngModel)]="tags" formControlName="tagId" class="form-select form-select mb-3">
+                    <select  formControlName="tagId" class="form-select form-select mb-3">
                         <option selected>Select</option>
                         <option *ngFor="let item of tags" [ngValue]="item.id">{{item.name}}</option>
                     </select>
-                    <select [(ngModel)]="categories" formControlName="categoriesIds"
+                    <select  formControlName="categoriesIds"
                         class="form-select form-select mb-3">
                         <option selected>Select</option>
                         <option *ngFor="let item of categories" [ngValue]="item.id">{{item.name}}</option>
@@ -49,7 +49,7 @@
                                 Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
                             </ngx-dropzone-label>
                             <ngx-dropzone-label *ngIf="imgSrc">
-                             <img [src]="imgSrc" alt="">
+                             <img [src]="imgSrc" alt="" class="w-25">
                             </ngx-dropzone-label>
                             <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
                             [removable]="true"  [file]="f" (removed)="onRemove(f)">

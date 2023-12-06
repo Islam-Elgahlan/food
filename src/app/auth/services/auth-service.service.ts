@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
-import { ILogin } from 'src/app/models/login';
+import { ILogin, IRrgister } from 'src/app/models/login';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,8 @@ export class AuthServiceService {
   }
   changePassword(data:any):Observable<any>{
     return this._HttpClient.put('Users/ChangePassword' , data)
+  }
+  register(data:IRrgister):Observable<any>{
+    return this._HttpClient.post('Users/Register' , data)
   }
 }

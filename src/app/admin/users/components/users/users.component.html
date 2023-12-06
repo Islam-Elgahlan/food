@@ -1,1 +1,70 @@
-<p>users works!</p>
+<section class="page-header">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-9 ">
+                <h3>Users <span>List</span></h3>
+                <p>You can now add your items that any user can order it from the Application and you can edit</p>
+            </div>
+            <div class="col-3">
+                <div class="text-end">
+                    <img src="../../../../../assets/images/menu-avatar.svg" class="w-75" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container py-4">
+        <div class="row py-3">
+            <div class="col-6 ">
+                <input type="text" [(ngModel)]="searchValue" (keyup)="getTableData()" placeholder="Search here"
+                class="form-control rounded">
+            </div>
+            <div class="col-3">
+                <select class="form-select" [(ngModel)]="groupId" (change)="getTableData()" >
+                    <option value="0">All</option>
+                    <option [value]="1" >Super Admin</option>
+                    <option [value]="2" > System User</option>
+                </select>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col"> Image</th>
+                    <th scope="col"> Email</th>
+                    <th scope="col"> Phone </th>
+                    <th scope="col"> Country</th>
+                    <th scope="col"> Role</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr *ngFor=" let item of tableData">
+                    <td>{{item.userName}}</td>
+                    <td>
+                        <img class="table-img" src="https://upskilling-egypt.com/{{item.imagePath}}">
+
+                    </td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.phoneNumber}}</td>
+                    <td>{{item.country}}</td>
+                    <td>{{item.group.name}}</td>
+
+                    <td class="text-center">
+                        <a (click)="onDeleteDialog(item)" class="dropdown-item " ><i class="fa-solid fa-trash-can mx-2 text-danger"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagenation">
+            <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+                [length]="tableResponse?.totalNumberOfRecords" [pageSize]="tableResponse?.pageSize"
+                [pageSizeOptions]="[5,10,25]" [pageIndex]="tableResponse?.pageNumber" aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+</section>

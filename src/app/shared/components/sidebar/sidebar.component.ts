@@ -69,14 +69,14 @@ export class SidebarComponent {
   {
     title: 'MyRecipes',
     icon: 'fa-utensils',
-    link: '/dashboard/user/categories',
+    link: '/dashboard/user/recipes',
     isActive: this.isUser()
 
   },
   {
     title: 'Favorates',
     icon: 'fa-heart',
-    link: '/dashboard/user/categories',
+    link: '/dashboard/user/favorites',
     isActive: this.isUser()
 
   }
