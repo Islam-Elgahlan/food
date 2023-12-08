@@ -12,5 +12,8 @@ export class UsersService {
   getUsers(data:any):Observable<any>{
     return this._HttpClient.get('Users' , {params: data});
   }
+  deleteUser(id:number):Observable<any>{
+    return this._HttpClient.delete(`Users/${id}`)
+  }
 
 }

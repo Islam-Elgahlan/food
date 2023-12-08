@@ -3,51 +3,68 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { VerifyComponent } from '../verify/verify.component';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.scss']
 })
-export class RegisterComponent {
+export class EditUserComponent {
+  currentUser: any ;
   imgSrc: any;
-  registerForm = new FormGroup({
+  updateForm = new FormGroup({
     userName: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     country : new FormControl(null, [Validators.required]),
     phoneNumber : new FormControl(null, [Validators.required ]),
     profileImage : new FormControl(null),
-    password: new FormControl(null, [Validators.required]),
     confirmPassword : new FormControl(null, [Validators.required])
   })
   constructor(
     private _AuthServiceService: AuthServiceService,
     private _ToastrService: ToastrService,
     private _Router: Router,
-    public _MatDialog: MatDialog,
+    private _HelperService:HelperService,
     ) { }
-    onRegister(data: FormGroup) {
+    ngOnInit(){
+      this.onGetCurrentUser()
+    }
+    onEditUser(data: FormGroup) {
       let myData = new FormData()
       let myMap = new Map(Object.entries(data.value))
       for (const [key,value] of myMap){
         myData.append(key , data.value[key])
+        myData.append('imagePath', this.imgSrc, this.imgSrc.name);
+
       }
     // console.log(data.value)
-    this._AuthServiceService.register(data.value).subscribe((res) => {
-      this._ToastrService.success(data.value.email, 'Welcome');
+    this._AuthServiceService.updateUser(data.value).subscribe((res) => {
+      this._ToastrService.success('Data Updated', 'Success');
+      this._Router.navigate(['dashboard/home'])
       // console.log(res)
-      this.openDialog()
       
     },
       error => {
-        this._ToastrService.error(error.error.message, 'Error in Registeration');
+        this._ToastrService.error(error.error.message, 'Error in Update');
       })
 
   }
  
-
+  onGetCurrentUser(){
+    this._HelperService.getCurrentUser().subscribe((res)=>{
+      this.currentUser = res ;
+      // console.log(this.currentUser)
+      this.imgSrc = 'https://upskilling-egypt.com/' + this.currentUser.imagePath
+      this.updateForm.patchValue({
+        userName: this.currentUser?.userName,
+        email: this.currentUser?.email,
+        country: this.currentUser?.country,
+        phoneNumber: this.currentUser?.phoneNumber,
+        confirmPassword: this.currentUser?.confirmPassword,
+      })
+    })
+  }
 
 
 
@@ -65,17 +82,5 @@ export class RegisterComponent {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  openDialog(): void {
-    const dialogRef = this._MatDialog.open(VerifyComponent, {
-      data: {},
-      width: '40%',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result){
-        // this.onResetRequest(result)
-      }
-    });
-  }
+  
 }

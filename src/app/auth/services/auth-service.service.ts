@@ -44,4 +44,10 @@ export class AuthServiceService {
   register(data:IRrgister):Observable<any>{
     return this._HttpClient.post('Users/Register' , data)
   }
+  verify(data:any):Observable<any>{
+    return this._HttpClient.put('Users/verify' , data)
+  }
+  updateUser(data:IRrgister):Observable<any>{
+    return this._HttpClient.put('Users' , data)
+  }
 }

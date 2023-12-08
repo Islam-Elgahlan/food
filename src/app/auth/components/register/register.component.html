@@ -64,9 +64,11 @@
             
             <div class="d-flex justify-content-between my-2">
               <a routerLink="/auth/login" class="text-second text-decoration-none">Login Now?</a>
+              <a (click)="openDialog()"  class="text-second text-decoration-none">Have a Code !</a>
 
             </div>
             <button [disabled]="registerForm.invalid" class="primary w-100">Register</button>
+            
           </form>
         </div>
 

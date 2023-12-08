@@ -65,7 +65,7 @@ export class AddEditRecipesComponent {
     if (this.recipeId) {
       // Edit
       this._RecipesService.editRecipe(myData, this.recipeId).subscribe((res) => {
-        console.log(res)
+        // console.log(res)
         this._ToastrService.success(res.message, 'Updated ');
         this._Router.navigate(['/dashboard/admin/recipes'])
       },

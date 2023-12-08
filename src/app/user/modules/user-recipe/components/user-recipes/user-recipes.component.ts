@@ -6,6 +6,8 @@ import { RecipesService } from 'src/app/admin/recipes/services/recipes.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
 import { RecipeDataComponent } from '../recipe-data/recipe-data.component';
+import { FavoritesService } from '../../../favorites/services/favorites.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-recipes',
@@ -23,8 +25,8 @@ export class UserRecipesComponent {
   tableData: IRecipe[] | undefined = [];
   tags:ITag[] = [];
   
-  constructor(private _RecipesService: RecipesService, private _HelperService:HelperService ,
-    private _MatDialog: MatDialog) { }
+  constructor(private _RecipesService: RecipesService, private _HelperService:HelperService , private _FavoritesService:FavoritesService
+   , private _ToastrService:ToastrService  , private _MatDialog: MatDialog) { }
   ngOnInit() {
     this.getTags()
     this.getTableData()
@@ -41,6 +43,11 @@ export class UserRecipesComponent {
       this.tableResponse = res;
       this.tableData = this.tableResponse?.data;
       console.log(this.tableResponse?.totalNumberOfRecords)
+    })
+  }
+  onAddToFavorite(id:number){
+    this._FavoritesService.addToFaVorite(id).subscribe((res)=>{
+    this._ToastrService.success('added to Favorites' , "added")
     })
   }
   getTags(){
@@ -65,9 +72,9 @@ export class UserRecipesComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      console.log(result)
       if (result) {
-        
+        this.onAddToFavorite(result)
         this.getTableData()
       }
     });

@@ -1,0 +1,51 @@
+<!-- <section class="verify">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto ">
+                <div class="login-logo card-auth ">
+                    <div class="text-center">
+                        <img src="../../../../assets/images/logo.svg" alt="" class="w-50">
+                    </div>
+                    <h2>Verify</h2>
+                    <p>Please Enter Your Verification Code  </p>
+                    <form [formGroup]="verifyForm" >
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-envelope"></i></span>
+                            <input type="text" formControlName="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                            <input type="text" formControlName="code" class="form-control"
+                                placeholder="Enter Your Code ">
+                        </div>
+                        <button (click)="onSubmit(verifyForm)" [disabled]="verifyForm.invalid" class="primary w-100">Verify</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<section>
+    <div class="login-logo card-auth ">
+        <div class="text-center">
+            <img src="../../../../assets/images/logo.svg" alt="" class="w-50">
+        </div>
+        <h2>Verify</h2>
+        <p>Please Enter Your Verification Code  </p>
+        <form [formGroup]="verifyForm" (ngSubmit)="onSubmit(verifyForm)" >
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-envelope"></i></span>
+                <input type="text" formControlName="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                <input type="text" formControlName="code" class="form-control"
+                    placeholder="Enter Your Code ">
+            </div>
+            <button  [disabled]="verifyForm.invalid" class="primary w-100">Verify</button>
+        </form>
+    </div>
+</section>

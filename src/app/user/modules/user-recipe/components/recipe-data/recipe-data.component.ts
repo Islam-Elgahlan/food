@@ -8,6 +8,7 @@ import { IRecipe } from 'src/app/admin/recipes/models/recipe';
   styleUrls: ['./recipe-data.component.scss']
 })
 export class RecipeDataComponent {
+  recipedata: string = '';
   constructor(
     public dialogRef: MatDialogRef<RecipeDataComponent> ,
      @Inject(MAT_DIALOG_DATA) public data: IRecipe) {}

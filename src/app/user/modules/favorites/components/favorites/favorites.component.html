@@ -1,1 +1,16 @@
-<p>favorites works!</p>
+<div class="row py-5 gy-3" *ngIf="userFavorites">
+    <div *ngFor="let item of userFavorites" class="col-md-4">
+        <div class="item shadow">
+            <div class="item-img">
+                <img class="w-100 mb-2" [src]=" 'https://upskilling-egypt.com/'+ item.recipe.imagePath">
+            </div>
+            <div class="p-3">
+                <h4>{{item.recipe.name}}</h4>
+                <p>{{item.recipe.description}}</p>
+            </div>
+            <div class="delete-icon">
+              <a (click)="onRemoveFromFavorite(item.id)" ><i class=" fa-solid fa-trash-can text-danger"></i></a>  
+            </div>
+        </div>
+    </div>
+</div>

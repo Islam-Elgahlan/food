@@ -64,11 +64,15 @@ export class UsersComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result) {
-        // this.onDeleteRecipe(result.id)
+        this.onDeleteUser(result.id)
       }
     });
   }
-
+onDeleteUser(id:number){
+  this._UsersService.deleteUser(id).subscribe((res)=>{
+    this.getTableData()
+  })
+}
 
 
 }

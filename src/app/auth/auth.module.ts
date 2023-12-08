@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RequestResetPasswordComponent } from './components/request-reset-password/request-reset-password.component';
 import { RegisterComponent } from './components/register/register.component';
+import { VerifyComponent } from './components/verify/verify.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 
 
@@ -16,7 +18,9 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     ResetPasswordComponent,
     RequestResetPasswordComponent,
-    RegisterComponent
+    RegisterComponent,
+    VerifyComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

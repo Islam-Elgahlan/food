@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  userName = localStorage.getItem('userName')
+  ngOnInit(){
+    this.onGetCurrentUser();
+  }
+  userName:any
+  constructor(private _HelperService:HelperService){}
+  // userName = localStorage.getItem('userName')
+  onGetCurrentUser(){
+    this._HelperService.getCurrentUser().subscribe((res)=>{
+      this.userName = res.userName ;
+    })
+  }
 }
