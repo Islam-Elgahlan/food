@@ -1,69 +1,78 @@
 <section class="login">
     <div class="container">
-      <div class="row">
-        <div class="col-md-10 mx-auto ">
-          <div class="login-logo card-auth ">
-            <div class="text-center">
-              <img src="../../../../assets/images/logo.svg" alt="" class="w-50">
+        <div class="row">
+            <div class="col-md-10 mx-auto ">
+                <div class="login-logo card-auth ">
+                    <div class="text-center">
+                        <img src="../../../../assets/images/logo.svg" alt="" class="w-50">
+                    </div>
+                    <h2>Update Profile</h2>
+                    <p>Welcome Back! You Can Edit Your Profile </p>
+                    <form [formGroup]="updateForm" (ngSubmit)="onEditUser(updateForm)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa-solid fa-mobile"></i></span>
+                                    <input type="text" formControlName="userName" class="form-control"
+                                        placeholder="User Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa-solid fa-lock"></i></span>
+                                    <input type="text" formControlName="email" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa-solid fa-mobile"></i></span>
+                                    <input type="text" formControlName="country" class="form-control"
+                                        placeholder="Country">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa-solid fa-lock"></i></span>
+                                    <input type="text" formControlName="phoneNumber" class="form-control"
+                                        placeholder="Phone Number">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fa-solid fa-lock"></i></span>
+                                    <input type="password" formControlName="confirmPassword" class="form-control"
+                                        placeholder="Confirm Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <ngx-dropzone  (change)="onSelect($event)" [multiple]="false">
+                                <ngx-dropzone-label *ngIf="!imgSrc">
+                                    <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+                                    Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+                                </ngx-dropzone-label>
+                                <ngx-dropzone-label *ngIf="imgSrc">
+                                 <img [src]="imgSrc" alt="" class="w-25">
+                                </ngx-dropzone-label>
+                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                                [removable]="true"  [file]="f" (removed)="onRemove(f)">
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
+
+                        <button [disabled]="updateForm.invalid" class="primary w-100">Update</button>
+
+                    </form>
+                </div>
+
+
             </div>
-            <h2>Update Profile</h2>
-            <p>Welcome Back! You Can Edit Your Profile </p>
-            <form [formGroup]="updateForm" (ngSubmit)="onEditUser(updateForm)">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-mobile"></i></span>
-                    <input type="text" formControlName="userName" class="form-control" placeholder="User Name" >
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
-                    <input type="text" formControlName="email" class="form-control" placeholder="Email">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-mobile"></i></span>
-                    <input type="text" formControlName="country" class="form-control" placeholder="Country">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
-                    <input type="text" formControlName="phoneNumber" class="form-control" placeholder="Phone Number">
-                  </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password">
-                  </div>
-                </div>
-              </div>
-              <div>
-                <ngx-dropzone  (change)="onSelect($event)" [multiple]="false">
-                    <ngx-dropzone-label *ngIf="!imgSrc">
-                        <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
-                        Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
-                    </ngx-dropzone-label>
-                    <ngx-dropzone-label *ngIf="imgSrc">
-                     <img [src]="imgSrc"  class="w-25">
-                    </ngx-dropzone-label>
-                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
-                    [removable]="true"  [file]="f" (removed)="onRemove(f)">
-                    </ngx-dropzone-image-preview>
-                </ngx-dropzone>
-            </div>
-              
-              <button [disabled]="updateForm.invalid" class="primary w-100">Update</button>
-              
-            </form>
-          </div>
-  
-  
         </div>
-      </div>
     </div>
-  </section>
+</section>

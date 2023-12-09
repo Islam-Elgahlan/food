@@ -41,13 +41,13 @@ export class AuthServiceService {
   changePassword(data:any):Observable<any>{
     return this._HttpClient.put('Users/ChangePassword' , data)
   }
-  register(data:IRrgister):Observable<any>{
+  register(data:any):Observable<any>{
     return this._HttpClient.post('Users/Register' , data)
   }
   verify(data:any):Observable<any>{
     return this._HttpClient.put('Users/verify' , data)
   }
-  updateUser(data:IRrgister):Observable<any>{
+  updateUser(data:any):Observable<any>{
     return this._HttpClient.put('Users' , data)
   }
 }

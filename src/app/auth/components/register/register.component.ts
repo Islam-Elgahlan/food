@@ -34,8 +34,10 @@ export class RegisterComponent {
       for (const [key,value] of myMap){
         myData.append(key , data.value[key])
       }
+      myData.append('profileImage', this.imgSrc, this.imgSrc.name);
+
     // console.log(data.value)
-    this._AuthServiceService.register(data.value).subscribe((res) => {
+    this._AuthServiceService.register(myData).subscribe((res) => {
       this._ToastrService.success(data.value.email, 'Welcome');
       // console.log(res)
       this.openDialog()

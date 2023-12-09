@@ -11,12 +11,13 @@ export class NavbarComponent {
   ngOnInit(){
     this.onGetCurrentUser();
   }
-  userName = localStorage.getItem('userName')
+  // userName = localStorage.getItem('userName')
   currentUser: any ;
   onGetCurrentUser(){
     this._HelperService.getCurrentUser().subscribe((res)=>{
-      console.log(res)
+      // console.log(res)
       this.currentUser = res ;
+      // console.log(this.currentUser.imagePath)
     })
   }
   

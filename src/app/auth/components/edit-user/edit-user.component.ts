@@ -32,16 +32,22 @@ export class EditUserComponent {
     }
     onEditUser(data: FormGroup) {
       let myData = new FormData()
+      // myData.append('userName' , data.value.userName)
+      // myData.append('email', data.value.email);
+      // myData.append('country', data.value.country);
+      // myData.append('phoneNumber', data.value.phoneNumber);
+      // myData.append('confirmPassword', data.value.confirmPassword);
+      // myData.append('profileImage', this.imgSrc, this.imgSrc.name);
       let myMap = new Map(Object.entries(data.value))
       for (const [key,value] of myMap){
         myData.append(key , data.value[key])
-        myData.append('imagePath', this.imgSrc, this.imgSrc.name);
-
       }
-    // console.log(data.value)
-    this._AuthServiceService.updateUser(data.value).subscribe((res) => {
+      myData.append('profileImage', this.imgSrc, this.imgSrc.name);
+
+    console.log(myData)
+    this._AuthServiceService.updateUser(myData).subscribe((res) => {
       this._ToastrService.success('Data Updated', 'Success');
-      this._Router.navigate(['dashboard/home'])
+      // this._Router.navigate(['dashboard/home'])
       // console.log(res)
       
     },
@@ -55,7 +61,7 @@ export class EditUserComponent {
     this._HelperService.getCurrentUser().subscribe((res)=>{
       this.currentUser = res ;
       // console.log(this.currentUser)
-      this.imgSrc = 'https://upskilling-egypt.com/' + this.currentUser.imagePath
+      this.imgSrc = 'https://upskilling-egypt.com/'+ this.currentUser.imagePath
       this.updateForm.patchValue({
         userName: this.currentUser?.userName,
         email: this.currentUser?.email,
